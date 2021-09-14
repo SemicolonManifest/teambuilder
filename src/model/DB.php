@@ -11,7 +11,8 @@ class DB
     {
         $DB = null;
         try {
-            $DB = new PDO('mysql:dbname=teambuilder;host=127.0.0.1', 'teambuilder', 'user');
+
+            $DB = new PDO(getenv('teambuilder_PDO_DSN', true), getenv('teambuilder_PDO_USERNAME', true), getenv('teambuilder_PDO_PASSWORD', true));
         } catch (Exception $exception) {
             throw new Exception("An exception has occurred when trying to connect to the database!");
         }
