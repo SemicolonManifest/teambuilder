@@ -1,5 +1,10 @@
 <?php
 
+namespace TeamBuilder\Model;
+
+use Exception;
+use PDO;
+
 class DB
 {
 

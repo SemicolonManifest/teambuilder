@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-4": {
+            "TeamBuilder\\Model\\": "src/model"
+        }
+    },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
     }

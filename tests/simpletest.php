@@ -6,7 +6,10 @@
  * Modified last :
  **/
 
-require "../Model/DB.php";
+require_once 'vendor/autoload.php';
+
+use TeamBuilder\Model\DB;
+
 echo "\n>>>>> Test selectMany:\n";
 $res = DB::selectMany("SELECT * FROM roles", []);
 var_dump($res);
