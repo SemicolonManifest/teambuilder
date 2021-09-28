@@ -32,7 +32,7 @@ class Member
         $member->name = $fields['name'];
         $member->password = $fields['password'];
         $member->role_id = $fields['role_id'];
-
+        if(isset($fields['id'])) $member->id =$fields['id'];
         return $member;
     }
 
@@ -59,11 +59,22 @@ class Member
 
     public function save(): bool
     {
-        return false;
+        if(isset($this->id) && isset($this->name) && isset($this->password) && isset($this->role_id)){
+            try {
+                DB::execute("Update members set name = :name, password = :password, role_id = :role_id where id = :id", ["id"=>$this->id, "name" => $this->name, "password" => $this->password, "role_id" => $this->role_id]);
+                return true;
+            }catch (Exception $e){
+                return false;
+            }
+        }else{
+            return false;
+        }
+
     }
 
     public function delete(): bool
     {
+
         return false;
     }
 
