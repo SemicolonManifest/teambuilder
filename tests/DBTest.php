@@ -1,18 +1,25 @@
 <?php
 
+namespace TeamBuilder\Model;
 use PHPUnit\Framework\TestCase;
-use TeamBuilder\Model\DB;
 
 final class DBTest extends TestCase
 {
 
+
+    protected function setUp(): void
+    {
+        $sqlscript = file_get_contents(dirname(__DIR__,1).'/doc/sql/teambuilder.sql');
+        DB::execute($sqlscript);
+
+    }
+
     public function testSelectMany(): void
     {
-
-
-        $res = DB::selectMany("SELECT * FROM roles", []);
-
-        $this->assertEquals(true, true);
+        $this->assertNotNull(DB::selectMany("SELECT * FROM roles"),"Select many roles test");
     }
+
+
+
 
 }
