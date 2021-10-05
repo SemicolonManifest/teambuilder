@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `teambuilder`.`teams`
 (
     `id`       INT         NOT NULL AUTO_INCREMENT,
     `name`     VARCHAR(45) NOT NULL,
-    `state_id` INT         NOT NULL,
+    `state_id` INT         NOT NULL DEFAULT 5,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
     INDEX `fk_teams_states1_idx` (`state_id` ASC) VISIBLE,

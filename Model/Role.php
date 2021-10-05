@@ -1,5 +1,4 @@
 <?php
-
 namespace TeamBuilder\Model;
 
 class Role

@@ -1,7 +1,7 @@
 <?php
-
 namespace TeamBuilder\Model;
 use \Exception;
+use PDOException;
 
 class Member
 {
@@ -10,6 +10,16 @@ class Member
     public string $password;
     public int $role_id;
 
+    public function teams():array
+    {
+        $results = DB::selectMany("select * from teams join team_member on teams.id = team_member.team_id where member_id=:member_id",["member_id"=>$this->id]);
+        $return = [];
+        foreach ($results as $result){
+            $return[] = Team::make($result);
+        }
+        return $return;
+    }
+
     public function create(): bool
     {
       if(isset($this->name) && isset($this->password) && isset($this->role_id)){
@@ -17,7 +27,7 @@ class Member
               $res = DB::insert("insert into teambuilder.members (name, password, role_id) values (:name, :password,:role_id )", ["name" => $this->name, "password" => $this->password, "role_id" => $this->role_id]);
               $this->id = $res;
               return isset($this->id);
-          }catch (Exception $e){
+          }catch (PDOException $e){
               return false;
           }
       }else{
@@ -44,7 +54,12 @@ class Member
 
     static function all(): array
     {
-        return DB::selectMany("select * from members;");
+        $results = DB::selectMany("select * from members;");
+        $return = [];
+        foreach ($results as $result){
+            $return[] = Member::make($result);
+        }
+        return $return;
     }
 
     static function where($field,$value): array
@@ -74,12 +89,16 @@ class Member
 
     public function delete(): bool
     {
-
-        return false;
+       return self::destroy($this->id);
     }
 
     static function destroy($id): bool
     {
-        return false;
+        try{
+            DB::execute("DELETE FROM members WHERE id=:id",["id"=>$id]);
+            return true;
+        }catch (PDOException $e){
+            return false;
+        }
     }
 }

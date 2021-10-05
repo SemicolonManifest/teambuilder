@@ -2,3 +2,5 @@
 vendor
 *.cache
 .env.php
+*.env
+.testCreds.php

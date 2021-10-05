@@ -9,7 +9,6 @@ class MemberTest extends TestCase
     {
         $sqlscript = file_get_contents(dirname(__DIR__,1).'/doc/sql/teambuilder.sql');
         $res = DB::execute($sqlscript);
-
     }
 
     /**
