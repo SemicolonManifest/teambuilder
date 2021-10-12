@@ -38,9 +38,17 @@ class MemberTest extends TestCase
         $this->assertEquals(0,count(Member::where("role_id",222)));
     }
 
+    public function testMake()
+    {
+        $member = Member::make(["name" => "XXX","password" => 'XXXPa$$w0rd', "role_id" => 1]);
+        $name = $member->name;
+        $this->assertEquals("XXX",$name);
+
+    }
+
     /**
      * @covers $member->create()
-     * @depends testAll
+     * @depends testMake
      */
     public function testCreate()
     {
