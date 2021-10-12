@@ -16,7 +16,7 @@ final class DBTest extends TestCase
 
     public function testSelectMany(): void
     {
-        $this->assertNotNull(DB::selectMany("SELECT * FROM roles"),"Select many roles test");
+        $this->assertNotNull(DB::selectMany(Role::class,"SELECT * FROM roles"),"Select many roles test");
     }
 
 

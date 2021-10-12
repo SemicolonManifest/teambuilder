@@ -107,4 +107,15 @@ class MemberTest extends TestCase
         $this->assertTrue(Member::destroy($id)); // expected to succeed
         $this->assertNull(Member::find($id)); // we should not find it back
     }
+
+    /**
+     * Assume the well-know dataset of 'teambuilder.sql'
+     * @covers $member->teams()
+     */
+    public function testTeams()
+    {
+        $this->assertEquals(1,count(Member::find(3)->teams()));
+        $this->assertEquals(0,count(Member::find(9)->teams()));
+        $this->assertEquals(3,count(Member::find(10)->teams()));
+    }
 }

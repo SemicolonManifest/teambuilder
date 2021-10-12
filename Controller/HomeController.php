@@ -10,13 +10,8 @@ class HomeController
 
     public function showHome()
     {
-        if(isset($_SESSION['member'])){
-            $member = unserialize($_SESSION['member']);
-        }else{
-            $sessionConstroller = new SessionController();
-            $sessionConstroller->createSession();
-            $member = unserialize($_SESSION['member']);
-        }
+        $memberController = new MemberController();
+        $user = $memberController->getCurrentUser();
 
         require_once "views/HomePage.php";
 

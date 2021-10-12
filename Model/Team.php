@@ -2,11 +2,23 @@
 
 namespace TeamBuilder\Model;
 
+use PDOException;
+use function PHPUnit\Framework\returnArgument;
+
 class Team
 {
     public int $id;
     public string $name;
     public int $state_id;
+
+    public function getCapitain(){
+        $result = DB::selectOne(Team::class,"select * from members join team_member on members.id = team_member.member_id where team_id=:team_id and is_captain=1",["team_id"=>$this->id]);
+    }
+
+    public function members() :array
+    {
+        return DB::selectMany(Member::class,"select * from members join team_member on members.id = team_member.member_id where team_id=:team_id",["team_id"=>$this->id]);
+    }
 
     public function create(): bool
     {
@@ -37,18 +49,14 @@ class Team
 
     static function find($id): ?Team
     {
-        $res = DB::selectOne("select * from teams where id=:id;",["id"=>$id]);
-        return isset($res['name']) ? Team::make($res) : null ;
+        $res = DB::selectOne(Team::class,"select * from teams where id=:id;",["id"=>$id]);
+        return isset($res->name) ? $res : null ;
     }
 
     static function all(): array
     {
-        $results = DB::selectMany("select * from teams;");
-        $return = [];
-        foreach ($results as $result){
-            $return[] = Team::make($result);
-        }
-        return $return;
+        return  DB::selectMany(Team::class,"select * from teams;");
+
     }
 
 
@@ -58,7 +66,7 @@ class Team
             try {
                 DB::execute("Update teams set name = :name, state_id = :state_id where id = :id", ["id"=>$this->id, "name" => $this->name, "state_id" => $this->state_id]);
                 return true;
-            }catch (Exception $e){
+            }catch (PDOException $e){
                 return false;
             }
         }else{

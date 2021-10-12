@@ -4,3 +4,4 @@ vendor
 .env.php
 *.env
 .testCreds.php
+node_modules

@@ -12,12 +12,7 @@ class Member
 
     public function teams():array
     {
-        $results = DB::selectMany("select * from teams join team_member on teams.id = team_member.team_id where member_id=:member_id",["member_id"=>$this->id]);
-        $return = [];
-        foreach ($results as $result){
-            $return[] = Team::make($result);
-        }
-        return $return;
+        return   DB::selectMany(Team::class,"select * from teams join team_member on teams.id = team_member.team_id where member_id=:member_id",["member_id"=>$this->id]);
     }
 
     public function create(): bool
@@ -48,28 +43,19 @@ class Member
 
     static function find($id): ?Member
     {
-        $res = DB::selectOne("select * from members where id=:id;",["id"=>$id]);
-        return isset($res['name']) ? Member::make($res) : null ;
+        $res = DB::selectOne(Member::class,"select * from members where id=:id;",["id"=>$id]);
+        return isset($res->name) ? $res : null ;
     }
 
     static function all(): array
     {
-        $results = DB::selectMany("select * from members;");
-        $return = [];
-        foreach ($results as $result){
-            $return[] = Member::make($result);
-        }
-        return $return;
+        return  DB::selectMany(Member::class,"select * from members order by name;");
     }
 
     static function where($field,$value): array
     {
-       $res = DB::selectMany("select * from members where $field = :value;",["value"=>$value]);
-       $return = [];
-       foreach ($res as $reslut){
-           $return[] = Member::make($reslut);
-       }
-        return $return;
+        return DB::selectMany(Member::class,"select * from members where $field = :value;",["value"=>$value]);
+
     }
 
     public function save(): bool

@@ -18,6 +18,9 @@ if (isset($_GET['action'])) {
         case 'memberList':
             $memberController->showMemberList();
             break;
+        case 'myProfile':
+            $memberController->showUserProfile();
+            break;
         default:
             $homeController->showHome();
     }
