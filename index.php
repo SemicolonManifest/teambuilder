@@ -6,7 +6,7 @@ use TeamBuilder\Controller\MemberController;
 
 session_start();
 date_default_timezone_set('Europe/Zurich');
-require_once 'vendor\autoload.php';
+require_once 'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
 
 $homeController = new HomeController();
 $memberController = new MemberController();
