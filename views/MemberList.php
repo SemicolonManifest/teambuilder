@@ -1,6 +1,7 @@
 <?php
 ob_start();
 ?>
+
 <table class="table table-striped " id="memberList">
     <thead>
     <tr>
@@ -16,8 +17,8 @@ ob_start();
     <tr>
         <td><?=$member->name ?></td>
         <td>
-            <?php foreach ($teamsByMember[$member->id] as $key => $teamByMember): ?>
-                <?=($teamByMember->name). ($key == array_key_last($teamsByMember[$member->id]) ? "" : ", ") ?>
+            <?php foreach ($member->teams() as $key => $team): ?>
+                <?=($team->name). ($key == array_key_last($member->teams()) ? "" : ", ") ?>
             <?php endforeach;?>
         </td>
     </tr>

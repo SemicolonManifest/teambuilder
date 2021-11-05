@@ -1,6 +1,7 @@
 <?php
 namespace TeamBuilder\Model;
 use \Exception;
+use PDO;
 use PDOException;
 
 class Member
@@ -12,7 +13,7 @@ class Member
 
     public function teams():array
     {
-        return   DB::selectMany(Team::class,"select * from teams join team_member on teams.id = team_member.team_id where member_id=:member_id",["member_id"=>$this->id]);
+        return   DB::selectMany("select teams.id, teams.name, teams.state_id from teams join team_member on teams.id = team_member.team_id where member_id=:member_id",PDO::FETCH_CLASS,Team::class,["member_id"=>$this->id]);
     }
 
     public function create(): bool
@@ -43,18 +44,18 @@ class Member
 
     static function find($id): ?Member
     {
-        $res = DB::selectOne(Member::class,"select * from members where id=:id;",["id"=>$id]);
+        $res = DB::selectOne("select * from members where id=:id;",PDO::FETCH_CLASS,Member::class,["id"=>$id]);
         return isset($res->name) ? $res : null ;
     }
 
     static function all(): array
     {
-        return  DB::selectMany(Member::class,"select * from members order by name;");
+        return  DB::selectMany("select * from members order by name;",PDO::FETCH_CLASS,Member::class);
     }
 
     static function where($field,$value): array
     {
-        return DB::selectMany(Member::class,"select * from members where $field = :value;",["value"=>$value]);
+        return DB::selectMany("select * from members where $field = :value;",PDO::FETCH_CLASS,Member::class,["value"=>$value]);
 
     }
 

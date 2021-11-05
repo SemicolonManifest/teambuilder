@@ -14,7 +14,6 @@ class HomeController
         $user = $memberController->getCurrentUser();
 
         require_once "views/HomePage.php";
-
     }
 
 }

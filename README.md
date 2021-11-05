@@ -11,8 +11,9 @@ This project require [phpUnit](https://phpunit.de/getting-started/phpunit-9.html
 ```bash
 git clone https://github.com/TGACPNV/teambuilder.git
 composer install
-composer require --dev phpunit/phpunit
 ```
+
+This project use SCSS styles so you need:
 
 ## Usage
 

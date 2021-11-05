@@ -1,0 +1,17 @@
+#userTeams {
+  border: 1px black solid;
+  width: fit-content;
+
+  thead {
+    background-color: #2567b3;
+    color: white;
+  }
+  td{
+    min-width: 12rem;
+  }
+}
+
+#content {
+  margin: 5px;
+  margin-top: 0;
+}

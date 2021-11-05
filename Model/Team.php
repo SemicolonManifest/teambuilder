@@ -2,6 +2,7 @@
 
 namespace TeamBuilder\Model;
 
+use PDO;
 use PDOException;
 use function PHPUnit\Framework\returnArgument;
 
@@ -11,14 +12,22 @@ class Team
     public string $name;
     public int $state_id;
 
-    public function getCapitain(){
-        $result = DB::selectOne(Team::class,"select * from members join team_member on members.id = team_member.member_id where team_id=:team_id and is_captain=1",["team_id"=>$this->id]);
+    public function getCapitain()
+    {
+        return DB::selectOne("select members.name from members join team_member on members.id = team_member.member_id where team_id=:team_id and is_captain=1",PDO::FETCH_ASSOC,null,["team_id"=>$this->id])['name'];
     }
 
     public function members() :array
     {
-        return DB::selectMany(Member::class,"select * from members join team_member on members.id = team_member.member_id where team_id=:team_id",["team_id"=>$this->id]);
+        return DB::selectMany("select * from members join team_member on members.id = team_member.member_id where team_id=:team_id",PDO::FETCH_CLASS,Member::class,["team_id"=>$this->id]);
     }
+
+    public function memberCount() : int
+    {
+        return DB::selectOne("select count(team_member.member_id) count from team_member where team_id = :id;",PDO::FETCH_ASSOC,null,["id"=>$this->id])['count'];
+    }
+
+
 
     public function create(): bool
     {
@@ -49,13 +58,13 @@ class Team
 
     static function find($id): ?Team
     {
-        $res = DB::selectOne(Team::class,"select * from teams where id=:id;",["id"=>$id]);
+        $res = DB::selectOne("select * from teams where id=:id;",PDO::FETCH_CLASS,Team::class,["id"=>$id]);
         return isset($res->name) ? $res : null ;
     }
 
     static function all(): array
     {
-        return  DB::selectMany(Team::class,"select * from teams;");
+        return  DB::selectMany("select * from teams;",PDO::FETCH_CLASS,Team::class);
 
     }
 

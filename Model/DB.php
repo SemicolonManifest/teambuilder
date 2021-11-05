@@ -30,16 +30,22 @@ class DB
      * @param $query - The SQL query
      * @param $params - The parameters
      * @param $multirecord - Bool - Do we want multiple raws ?
+     * @param int $fetch_mode - either PDO::FETCH_CLASS or PDO::FETCH_ASSOC
      * @return array|null
      */
-    public static function select($query, $params, $multirecord, $className)
+    public static function select($query, $params, $multirecord, $fetch_mode, $className = null)
     {
 
         $DB = self::getPDO();
         try {
             $statement = $DB->prepare($query);     //Préparer la requête
             $statement->execute($params);
-            $statement->setFetchMode(PDO::FETCH_CLASS,$className);
+            if($fetch_mode== PDO::FETCH_CLASS){
+                $statement->setFetchMode(PDO::FETCH_CLASS,$className);
+            }elseif ($fetch_mode== PDO::FETCH_ASSOC){
+                $statement->setFetchMode(PDO::FETCH_ASSOC);
+            }
+
             //Exécuter la requête
             if ($multirecord)       //Si on veut récuperer plusieurs données
             {
@@ -56,15 +62,15 @@ class DB
     }
 
 
-    public static function selectMany($className,$query, $params = [])
+    public static function selectMany($query,$fetch_mode, $className = null, $params = [])
     {
-        return self::select($query, $params, true,$className);
+        return self::select($query, $params, true,$fetch_mode,$className);
     }
 
 
-    public static function selectOne($className,$query, $params = [])
+    public static function selectOne($query,$fetch_mode, $className = null, $params = [])
     {
-        return self::select($query, $params, false,$className);
+        return self::select($query, $params, false,$fetch_mode,$className);
     }
 
     /**

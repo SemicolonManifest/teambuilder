@@ -14,8 +14,7 @@ class MemberController
         if (isset($_SESSION['member'])) {
             $user = unserialize($_SESSION['member']);
         } else {
-            $sessionConstroller = new SessionController();
-            $sessionConstroller->createSession();
+            $this->Login();
             $user = unserialize($_SESSION['member']);
         }
 
@@ -41,7 +40,21 @@ class MemberController
         $user = $this->getCurrentUser();
         $teams = $user->teams();
 
+
         require 'views/userProfile.php';
+    }
+
+    /** This login is a temporary auto-login
+     *
+     */
+    public function Login(){
+        require_once "controller/.testCreds.php";
+
+        if (APP_USER_ID !== null) {
+            $member = new Member();
+            $member = Member::find(APP_USER_ID);
+            $_SESSION['member'] = serialize($member);
+        }
     }
 
 
