@@ -17,6 +17,10 @@
 #menu .dropdown .btn {
   color: white;
 }
+#menu .version {
+  font-size: smaller;
+  padding-right: 20px;
+}
 
 #btnMemberList {
   margin: 5px;
