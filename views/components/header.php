@@ -13,7 +13,7 @@ ob_start();
 
 
         <div class="loggedAs">
-            <div class="version">Version: Début Examen - Théo</div>
+            <div class="version">Version: Fin Examen - Théo</div>
             <div class="dropdown">
             <a class="btn dropdown-toggle" href="#" role="button" id="loggedAs" data-bs-toggle="dropdown" aria-expanded="false">
                  Connecté en tant que <?= $connectedUser->name ?>
