@@ -8,13 +8,13 @@ use function PHPUnit\Framework\returnArgument;
 
 class Team
 {
-    public int $id;
+    public int $team_id;
     public string $name;
     public int $state_id;
 
-    public function getCapitain()
+    public function getCaptain()
     {
-        return DB::selectOne("select members.name from members join team_member on members.id = team_member.member_id where team_id=:team_id and is_captain=1",PDO::FETCH_ASSOC,null,["team_id"=>$this->id])['name'];
+        return DB::selectOne("select members.name from members join team_member on members.id = team_member.member_id where team_id=:team_id and is_captain=1",PDO::FETCH_ASSOC,null,["team_id"=>$this->id])["name"];
     }
 
     public function members() :array

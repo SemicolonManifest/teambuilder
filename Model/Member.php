@@ -17,6 +17,16 @@ class Member
         return   DB::selectMany("select teams.id, teams.name, teams.state_id from teams join team_member on teams.id = team_member.team_id where member_id=:member_id",PDO::FETCH_CLASS,Team::class,["member_id"=>$this->id]);
     }
 
+    public function teamsWhereMember():array
+    {
+        return   DB::selectMany("select teams.id,teams.name,teams.state_id from teams join team_member on teams.id = team_member.team_id where member_id=:member_id and is_captain=0",PDO::FETCH_CLASS,Team::class,["member_id"=>$this->id]);
+    }
+
+    public function teamsWhereCaptain():array
+    {
+        return   DB::selectMany("select teams.id,teams.name,teams.state_id from teams join team_member on teams.id = team_member.team_id where member_id=:member_id and is_captain=1",PDO::FETCH_CLASS,Team::class,["member_id"=>$this->id]);
+    }
+
     public function create(): bool
     {
       if(isset($this->name) && isset($this->password) && isset($this->role_id) && isset($this->status_id)){

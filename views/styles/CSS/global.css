@@ -51,15 +51,15 @@
   background-color: #4d92e0;
 }
 
-#userTeams {
+#userTeamsMember, #userTeamsCaptain {
   border: 1px black solid;
   width: fit-content;
 }
-#userTeams thead {
+#userTeamsMember thead, #userTeamsCaptain thead {
   background-color: #2567b3;
   color: white;
 }
-#userTeams td {
+#userTeamsMember td, #userTeamsCaptain td {
   min-width: 12rem;
 }
 

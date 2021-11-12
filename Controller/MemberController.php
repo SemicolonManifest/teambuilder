@@ -39,7 +39,9 @@ class MemberController
     public function showUserProfile()
     {
         $user = $this->getCurrentUser();
-        $teams = $user->teams();
+        $teamsWhereMember = $user->teamsWhereMember();
+        $teamsWhereCaptain = $user->teamsWhereCaptain();
+
 
 
         require 'views/userProfile.php';
