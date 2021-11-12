@@ -18,7 +18,7 @@ ob_start();
         <td><?=$member->name ?></td>
         <td>
             <?php foreach ($member->teams() as $key => $team): ?>
-                <?=($team->name). ($key == array_key_last($member->teams()) ? "" : ", ") ?>
+                <div class="teamCapsule"><?=($team->name)?></div>
             <?php endforeach;?>
         </td>
     </tr>

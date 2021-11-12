@@ -27,6 +27,21 @@
   color: white;
 }
 
+.teamCapsule {
+  border-radius: 500px;
+  margin: 2px;
+  background-color: #2567b3;
+  width: fit-content;
+  display: inline;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+}
+.teamCapsule:hover {
+  background-color: #4d92e0;
+}
+
 #userTeams {
   border: 1px black solid;
   width: fit-content;
