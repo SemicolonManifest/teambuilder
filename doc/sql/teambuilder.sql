@@ -175,8 +175,7 @@ INSERT INTO `teams` (`id`, `name`, `state_id`) VALUES
 	(12, 'Les Squeezos', 1),
 	(13, 'Les Chevaliers du Zodiaque', 1),
 	(14, 'No Name', 1),
-	(15, 'Black Lagoon', 1),
-	(16, 'TestTeam', 5);
+	(15, 'Black Lagoon', 1);
 /*!40000 ALTER TABLE `teams` ENABLE KEYS */;
 
 -- Listage de la structure de la table teambuilder. team_member
