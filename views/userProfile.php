@@ -2,6 +2,14 @@
 ob_start();
 ?>
     <div id="content">
+        <div id="userInfos">
+            Nom d'utilisateur: <?= $user->name ?>
+            <br>
+            Statut: <?= $user->status()->name ?>
+            <br>
+            Rôle: <?= $user->role()->name ?>
+
+        </div>
         <div id="userTeams" class="table table-striped">
             <table>
                 <thead>
@@ -20,8 +28,8 @@ ob_start();
                     <?php foreach ($teams as $team): ?>
                         <tr>
                             <td><?= $team->name ?></td>
-                            <td><?=$team->memberCount() ?></td>
-                            <td><?=$team->getCapitain() ?></td>
+                            <td><?= $team->memberCount() ?></td>
+                            <td><?= $team->getCapitain() ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

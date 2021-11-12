@@ -3,6 +3,7 @@
 namespace TeamBuilder\Controller;
 
 use TeamBuilder\Model\Member;
+use TeamBuilder\Model\Status;
 use TeamBuilder\Model\Team;
 
 class MemberController

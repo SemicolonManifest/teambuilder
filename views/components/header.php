@@ -12,15 +12,17 @@ ob_start();
         </h3>
 
 
-
-        <div class="dropdown">
+        <div class="loggedAs">
+            <div class="version">Version: Début Examen - Théo</div>
+            <div class="dropdown">
             <a class="btn dropdown-toggle" href="#" role="button" id="loggedAs" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="version">Version: Début Examen - Théo</span>  Connecté en tant que <?= $user->name ?>
+                 Connecté en tant que <?= $user->name ?>
             </a>
 
             <div class="dropdown-menu" aria-labelledby="loggedAs">
                 <a class="dropdown-item" href="?action=myProfile">Mon Profil</a>
             </div>
+        </div>
         </div>
     </div>
 

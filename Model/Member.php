@@ -90,4 +90,14 @@ class Member
             return false;
         }
     }
+
+    public function status(): Status
+    {
+        return Status::find($this->status_id);
+    }
+
+    public function role()
+    {
+        return Role::find($this->role_id);
+    }
 }
