@@ -15,7 +15,7 @@ ob_start();
     </thead>
     <?php foreach ($members as $member):?>
     <tr>
-        <td><?=$member->name ?></td>
+        <td><?php if($connectedUser->role_id == 2): ?><a href="?action=userProfile&id=<?=$member->id ?>"><?php endif;?><?=$member->name ?><?php if($connectedUser->role_id == 2): ?></a><?php endif;?></td>
         <td>
             <?php foreach ($member->teams() as $key => $team): ?>
                 <div class="teamCapsule"><?=($team->name)?></div>

@@ -13,18 +13,19 @@ class MemberController
     {
 
         if (isset($_SESSION['member'])) {
-            $user = unserialize($_SESSION['member']);
+            $connectedUser = unserialize($_SESSION['member']);
         } else {
             $this->Login();
-            $user = unserialize($_SESSION['member']);
+            $connectedUser = unserialize($_SESSION['member']);
         }
 
-        return $user;
+        return $connectedUser;
     }
 
     public function showMemberList()
     {
-        $user = $this->getCurrentUser();
+        $connectedUser = $this->getCurrentUser();
+
         $members = Member::all();
         $teamsByMember = [];
         foreach ($members as $member) {
@@ -36,14 +37,28 @@ class MemberController
         require 'views/MemberList.php';
     }
 
-    public function showUserProfile()
+    public function showOwnProfile()
     {
+        $connectedUser = $this->getCurrentUser();
         $user = $this->getCurrentUser();
         $teamsWhereMember = $user->teamsWhereMember();
         $teamsWhereCaptain = $user->teamsWhereCaptain();
 
 
+        $pageTitle = "Mon profil";
+        require 'views/userProfile.php';
+    }
 
+    public function showUserProfile()
+    {
+        $connectedUser = $this->getCurrentUser();
+        $userId = $_GET["id"];
+        $user = Member::find($userId);
+        $teamsWhereMember = $user->teamsWhereMember();
+        $teamsWhereCaptain = $user->teamsWhereCaptain();
+
+
+        $pageTitle = "Profil de ".$user->name;
         require 'views/userProfile.php';
     }
 

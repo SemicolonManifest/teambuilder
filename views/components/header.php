@@ -16,7 +16,7 @@ ob_start();
             <div class="version">Version: Début Examen - Théo</div>
             <div class="dropdown">
             <a class="btn dropdown-toggle" href="#" role="button" id="loggedAs" data-bs-toggle="dropdown" aria-expanded="false">
-                 Connecté en tant que <?= $user->name ?>
+                 Connecté en tant que <?= $connectedUser->name ?>
             </a>
 
             <div class="dropdown-menu" aria-labelledby="loggedAs">

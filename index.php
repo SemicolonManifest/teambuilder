@@ -19,6 +19,9 @@ if (isset($_GET['action'])) {
             $memberController->showMemberList();
             break;
         case 'myProfile':
+            $memberController->showOwnProfile();
+            break;
+        case 'userProfile':
             $memberController->showUserProfile();
             break;
         default:
