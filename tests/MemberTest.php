@@ -40,7 +40,7 @@ class MemberTest extends TestCase
 
     public function testMake()
     {
-        $member = Member::make(["name" => "XXX","password" => 'XXXPa$$w0rd', "role_id" => 1]);
+        $member = Member::make(["name" => "XXX","password" => 'XXXPa$$w0rd', "role_id" => 1,"status_id"=>1]);
         $name = $member->name;
         $this->assertEquals("XXX",$name);
 
@@ -52,7 +52,7 @@ class MemberTest extends TestCase
      */
     public function testCreate()
     {
-        $member = Member::make(["name" => "XXX","password" => 'XXXPa$$w0rd', "role_id" => 1]);
+        $member = Member::make(["name" => "XXX","password" => 'XXXPa$$w0rd', "role_id" => 1,"status_id"=>1]);
         $this->assertTrue($member->create());
         $this->assertFalse($member->create());
     }
@@ -88,7 +88,7 @@ class MemberTest extends TestCase
     {
         $member = Member::find(1);
         $this->assertFalse($member->delete()); // expected to fail because of foreign key
-        $member = Member::make(["name" => "dummy","password" => "dummy", "role_id" => 1]);
+        $member = Member::make(["name" => "dummy","password" => "dummy", "role_id" => 1,"status_id"=>1]);
         $member->create(); // to get an id from the db
         $id = $member->id;
         $this->assertTrue($member->delete()); // expected to succeed
@@ -101,7 +101,7 @@ class MemberTest extends TestCase
     public function testDestroy()
     {
         $this->assertFalse(Member::destroy(1)); // expected to fail because of foreign key
-        $member = Member::make(["name" => "dummy","password" => "dummy", "role_id" => 1]);
+        $member = Member::make(["name" => "dummy","password" => "dummy", "role_id" => 1,"status_id"=>1]);
         $member->create(); // to get an id from the db
         $id = $member->id;
         $this->assertTrue(Member::destroy($id)); // expected to succeed

@@ -10,6 +10,7 @@ class Member
     public string $name;
     public string $password;
     public int $role_id;
+    public int $status_id;
 
     public function teams():array
     {
@@ -18,9 +19,9 @@ class Member
 
     public function create(): bool
     {
-      if(isset($this->name) && isset($this->password) && isset($this->role_id)){
+      if(isset($this->name) && isset($this->password) && isset($this->role_id) && isset($this->status_id)){
           try {
-              $res = DB::insert("insert into teambuilder.members (name, password, role_id) values (:name, :password,:role_id )", ["name" => $this->name, "password" => $this->password, "role_id" => $this->role_id]);
+              $res = DB::insert("insert into teambuilder.members (name, password, role_id,status_id) values (:name, :password,:role_id,:status_id )", ["name" => $this->name, "password" => $this->password, "role_id" => $this->role_id,"status_id"=>$this->status_id]);
               $this->id = $res;
               return isset($this->id);
           }catch (PDOException $e){
@@ -38,6 +39,7 @@ class Member
         $member->name = $fields['name'];
         $member->password = $fields['password'];
         $member->role_id = $fields['role_id'];
+        $member->status_id = $fields['status_id'];
         if(isset($fields['id'])) $member->id =$fields['id'];
         return $member;
     }
@@ -61,9 +63,9 @@ class Member
 
     public function save(): bool
     {
-        if(isset($this->id) && isset($this->name) && isset($this->password) && isset($this->role_id)){
+        if(isset($this->id) && isset($this->name) && isset($this->password) && isset($this->role_id) && isset($this->status_id)){
             try {
-                DB::execute("Update members set name = :name, password = :password, role_id = :role_id where id = :id", ["id"=>$this->id, "name" => $this->name, "password" => $this->password, "role_id" => $this->role_id]);
+                DB::execute("Update members set name = :name, password = :password, role_id = :role_id, status_id = :status_id where id = :id", ["id"=>$this->id, "name" => $this->name, "password" => $this->password, "role_id" => $this->role_id,"status_id"=>$this->status_id]);
                 return true;
             }catch (Exception $e){
                 return false;
