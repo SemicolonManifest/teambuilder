@@ -6,6 +6,12 @@ use PHPUnit\Framework\TestCase;
 
 class RoleTest extends TestCase
 {
+    static function setUpBeforeClass(): void
+    {
+        $sqlscript = file_get_contents(dirname(__DIR__,1).'/doc/sql/teambuilder.sql');
+        $res = DB::execute($sqlscript);
+    }
+
     /**
      * @covers Role::all()
      */
@@ -67,7 +73,7 @@ class RoleTest extends TestCase
         $role = Role::find(1);
         $this->assertFalse($role->delete()); // expected to fail because of foreign key
         $role = new Role();
-        $role->slug = "ZZZ";
+        $role->slug = "YYY";
         $role->name = "dummy";
         $role->create();
         $id = $role->id;
@@ -83,7 +89,7 @@ class RoleTest extends TestCase
         $this->assertFalse(Role::destroy(1)); // expected to fail because of foreign key
         $role = new Role();
         $role->slug = "ZZZ";
-        $role->name = "dummy";
+        $role->name = "dumm";
         $role->create();
         $id = $role->id;
         $this->assertTrue(Role::destroy($id)); // expected to succeed

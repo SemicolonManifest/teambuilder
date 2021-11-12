@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class MemberTest extends TestCase
 {
-    protected function setUp(): void
+    static function setUpBeforeClass(): void
     {
         $sqlscript = file_get_contents(dirname(__DIR__,1).'/doc/sql/teambuilder.sql');
         $res = DB::execute($sqlscript);

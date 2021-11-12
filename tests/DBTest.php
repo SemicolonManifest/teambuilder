@@ -1,6 +1,7 @@
 <?php
 
 namespace TeamBuilder\Model;
+use PDO;
 use PHPUnit\Framework\TestCase;
 
 final class DBTest extends TestCase
@@ -16,7 +17,7 @@ final class DBTest extends TestCase
 
     public function testSelectMany(): void
     {
-        $this->assertNotNull(DB::selectMany(Role::class,"SELECT * FROM roles"),"Select many roles test");
+        $this->assertNotNull(DB::selectMany("SELECT * FROM roles",PDO::FETCH_CLASS,Role::class),"Select many roles test");
     }
 
 
